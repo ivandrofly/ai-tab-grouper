@@ -1,0 +1,53 @@
+@import '../shared.css';
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+  font-size: 14px;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.brand h1 { margin: 0; font-size: 20px; font-weight: 600; }
+
+.card {
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.card h2 { margin: 0 0 12px; font-size: 15px; }
+
+.field { display: grid; gap: 5px; margin-bottom: 16px; }
+.field:last-child { margin-bottom: 0; }
+.label { font-weight: 600; }
+.hint { color: var(--muted); font-size: 12px; }
+
+.key-row { display: flex; gap: 8px; }
+.key-row input { flex: 1; min-width: 0; }
+
+input[type="password"], input[type="text"], input[type="number"], select {
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+input[type="number"] { width: 90px; }
+input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+.check { display: flex; align-items: flex-start; gap: 8px; margin-top: 10px; cursor: pointer; }
+.check input { margin: 3px 0 0; accent-color: var(--accent); }
+
+.result { min-height: 1.4em; font-size: 12px; }
+.result.ok { color: var(--ok); }
+.result.error { color: var(--danger); }
+
+.saved { min-height: 1.4em; margin: 0 0 14px; color: var(--muted); font-size: 12px; }
+
+.privacy p { margin: 0; color: var(--muted); }
+code { font: 12px/1.4 ui-monospace, "Cascadia Code", Consolas, monospace; }
+a { color: var(--accent); }

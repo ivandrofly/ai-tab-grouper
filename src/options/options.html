@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Tab Grouper settings</title>
+  <link rel="stylesheet" href="./options.css">
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <img src="../../icons/icon48.png" alt="" width="32" height="32">
+      <h1>AI Tab Grouper</h1>
+    </header>
+
+    <form id="form" autocomplete="off">
+      <section class="card">
+        <h2>Claude API</h2>
+
+        <label class="field">
+          <span class="label">API key</span>
+          <span class="key-row">
+            <input id="apiKey" name="apiKey" type="password" placeholder="sk-ant-…" spellcheck="false">
+            <button id="reveal" type="button" class="btn">Show</button>
+            <button id="test" type="button" class="btn">Test key</button>
+          </span>
+          <span class="hint">Create one at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>. It is stored only on this device (not synced).</span>
+          <span id="test-result" class="result" role="status"></span>
+        </label>
+
+        <label class="field">
+          <span class="label">Model</span>
+          <select id="model" name="model"></select>
+          <span class="hint">Opus gives the best groups. Sonnet and Haiku are cheaper per run.</span>
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Grouping</h2>
+
+        <label class="field">
+          <span class="label">Smallest new group</span>
+          <input id="minGroupSize" name="minGroupSize" type="number" min="1" max="10" step="1">
+          <span class="hint">New groups need at least this many tabs. A single tab can still join an existing group.</span>
+        </label>
+
+        <label class="check">
+          <input id="stripQuery" name="stripQuery" type="checkbox">
+          <span>Remove <code>?query</code> strings from URLs before sending them</span>
+        </label>
+
+        <label class="check">
+          <input id="collapseNew" name="collapseNew" type="checkbox">
+          <span>Collapse new groups</span>
+        </label>
+      </section>
+
+      <p id="saved" class="saved" role="status"></p>
+    </form>
+
+    <section class="card privacy">
+      <h2>Privacy</h2>
+      <p>When you click <strong>Group tabs</strong>, the titles and URLs of the ungrouped tabs in that window, plus the names of its existing groups, are sent to the Claude API (<code>api.anthropic.com</code>) with your API key. Page contents are never read or sent. Nothing is sent at any other time.</p>
+    </section>
+  </main>
+
+  <script type="module" src="./options.ts"></script>
+</body>
+</html>
