@@ -42,6 +42,8 @@ When you click **Group tabs**, the extension sends this to the Claude API at `ap
 
 Page contents are never read. Nothing is sent at any other time. The API key is stored in `chrome.storage.local` on this device and is not synced.
 
+Full policy: [PRIVACY.md](PRIVACY.md).
+
 ## Permissions
 
 | Permission | Why |
