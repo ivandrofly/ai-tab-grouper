@@ -37,13 +37,38 @@ describe('validatePlan', () => {
         group([1], { existingGroupId: 5, title: 'Work' }),
         group([2, 3, 4], { title: 'Big' }),
       ],
-    }, items, [5], 3);
+    }, items, [{ id: 5, title: 'Work' }], 3);
     expect(result.map((g) => [g.title, g.tabIds])).toEqual([['Work', [11]], ['Big', [12, 13, 14]]]);
   });
 
   it('turns a stale existingGroupId into a new group', () => {
-    const [g] = validatePlan({ groups: [group([0, 1], { existingGroupId: 42 })] }, items, [5]);
+    const [g] = validatePlan({ groups: [group([0, 1], { existingGroupId: 42 })] }, items, [{ id: 5, title: 'Work' }]);
     expect(g?.existingGroupId).toBeNull();
+  });
+
+  it('sends a new group to an existing group with the same title', () => {
+    const [g] = validatePlan({ groups: [group([0], { title: '  docs ' })] }, items, [{ id: 5, title: 'Docs' }]);
+    expect(g).toEqual({ existingGroupId: 5, title: 'Docs', color: 'blue', tabIds: [10] });
+  });
+
+  it('does not match untitled existing groups by title', () => {
+    const [g] = validatePlan({ groups: [group([0, 1], { title: '' })] }, items, [{ id: 5, title: '' }]);
+    expect(g?.existingGroupId).toBeNull();
+  });
+
+  it('merges entries aimed at the same group', () => {
+    const result = validatePlan({
+      groups: [
+        group([0], { existingGroupId: 5 }),
+        group([3], { title: 'News' }),
+        group([2], { title: 'work' }),
+        group([4], { title: 'News' }),
+      ],
+    }, items, [{ id: 5, title: 'Work' }]);
+    expect(result.map((g) => [g.existingGroupId, g.title, g.tabIds])).toEqual([
+      [5, 'Work', [10, 12]],
+      [null, 'News', [13, 14]],
+    ]);
   });
 
   it('does not let a dropped group consume its tabs', () => {

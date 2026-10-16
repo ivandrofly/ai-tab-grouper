@@ -38,7 +38,7 @@ Open the popup by clicking the icon or with <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd
 When you click **Group tabs**, the extension sends this to the Claude API at `api.anthropic.com`, using your API key:
 
 - the title and URL of each ungrouped tab in that window (the `#fragment` is always removed, and the `?query` by default);
-- the names and colors of the window's existing groups.
+- the names and colors of the window's existing groups, plus the titles and URLs of up to 8 tabs in each, so Claude can add new tabs to the group they fit (URLs shortened the same way).
 
 Page contents are never read. Nothing is sent at any other time. The API key is stored in `chrome.storage.local` on this device and is not synced.
 

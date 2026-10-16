@@ -70,6 +70,23 @@ export function toItems(
   return items;
 }
 
+/**
+ * Shortened titles and URLs of the tabs already in one group, so the model can
+ * tell what the group is about even when its title is empty or vague.
+ */
+export function groupTabs(
+  tabs: TabLike[],
+  groupId: number,
+  { stripQuery = true }: { stripQuery?: boolean } = {},
+): { title: string; promptUrl: string }[] {
+  return tabs
+    .filter((tab) => tab.groupId === groupId)
+    .map((tab) => ({
+      title: (tab.title || '').trim().slice(0, MAX_TITLE),
+      promptUrl: cleanUrl(tab.url || tab.pendingUrl || '', stripQuery),
+    }));
+}
+
 function isBlank(url: string): boolean {
   return url === 'about:blank' || url.startsWith('chrome://newtab') || url.startsWith('chrome://new-tab-page');
 }

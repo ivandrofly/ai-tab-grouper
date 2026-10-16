@@ -36,7 +36,7 @@ WHAT YOU NEED
 A Claude API key from Anthropic. Each grouping run is billed to that key by Anthropic, usually a fraction of a cent to a few cents depending on the model and number of tabs.
 
 PRIVACY
-Data leaves your browser only when you press Group tabs, and only goes to the Claude API (api.anthropic.com). It includes the titles and addresses of the ungrouped tabs in that window and the names of its existing groups. The #fragment of each address is always removed, and the ?query is removed by default. Page contents are never read. Your API key is stored only on this device and is not synced. The developer receives no data, and there are no analytics.
+Data leaves your browser only when you press Group tabs, and only goes to the Claude API (api.anthropic.com). It includes the titles and addresses of the ungrouped tabs in that window, and the names of its existing groups with the titles and addresses of up to 8 tabs in each. The #fragment of each address is always removed, and the ?query is removed by default. Page contents are never read. Your API key is stored only on this device and is not synced. The developer receives no data, and there are no analytics.
 
 PERMISSIONS
 • Read your browsing history: used to read the titles and addresses of open tabs so they can be grouped. Nothing is read until you press Group tabs.

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cleanUrl, toItems, NO_GROUP } from '../src/lib/tabs';
+import { cleanUrl, toItems, groupTabs, NO_GROUP } from '../src/lib/tabs';
 
 describe('cleanUrl', () => {
   it('drops scheme, www., fragment and trailing slash', () => {
@@ -71,5 +71,20 @@ describe('toItems', () => {
   it('respects stripQuery', () => {
     const [item] = toItems([tab(1, { url: 'https://a.com/s?q=cats' })], { stripQuery: false });
     expect(item?.promptUrl).toBe('a.com/s?q=cats');
+  });
+});
+
+describe('groupTabs', () => {
+  it('describes only the tabs in the given group, with shortened URLs', () => {
+    const tabs = [
+      { id: 1, title: ' Issue 12 ', url: 'https://github.com/a/b/issues/12?x=1', groupId: 7 },
+      { id: 2, title: 'Other', url: 'https://other.com', groupId: 8 },
+      { id: 3, title: 'Loading', pendingUrl: 'https://docs.a.dev/', groupId: 7 },
+    ];
+    expect(groupTabs(tabs, 7)).toEqual([
+      { title: 'Issue 12', promptUrl: 'github.com/a/b/issues/12' },
+      { title: 'Loading', promptUrl: 'docs.a.dev' },
+    ]);
+    expect(groupTabs(tabs, 7, { stripQuery: false })[0]?.promptUrl).toBe('github.com/a/b/issues/12?x=1');
   });
 });

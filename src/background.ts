@@ -1,5 +1,5 @@
 import { loadSettings } from './lib/settings';
-import { toItems } from './lib/tabs';
+import { toItems, groupTabs } from './lib/tabs';
 import { validatePlan } from './lib/schema';
 import { suggestGroups, toUserFacing, testKey } from './lib/claude';
 import { applyPlan, ungroupMoves } from './lib/apply';
@@ -39,6 +39,7 @@ async function groupWindow(windowId: number): Promise<Replies['group']> {
       title: g.title ?? '',
       color: g.color,
       size: tabs.filter((t) => t.groupId === g.id).length,
+      tabs: groupTabs(tabs, g.id, { stripQuery: settings.stripQuery }),
     }));
     if (items.length === 1 && groups.length === 0) return finish(windowId, 'Only one ungrouped tab, nothing to group.', []);
 
@@ -50,7 +51,7 @@ async function groupWindow(windowId: number): Promise<Replies['group']> {
       groups,
       minGroupSize: settings.minGroupSize,
     });
-    const resolved = validatePlan(plan, items, groups.map((g) => g.id), settings.minGroupSize);
+    const resolved = validatePlan(plan, items, groups, settings.minGroupSize);
     const { applied, failed } = await applyPlan(windowId, resolved, { collapseNew: settings.collapseNew });
 
     const moves = applied.flatMap((g) => g.tabIds.map((tabId) => ({ tabId, groupId: g.groupId })));

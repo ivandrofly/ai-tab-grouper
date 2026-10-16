@@ -1,13 +1,13 @@
 # Privacy Policy for AI Tab Grouper
 
-Last updated: 2026-10-11
+Last updated: 2026-10-16
 
 AI Tab Grouper is a Chrome extension that sorts your open tabs into named tab groups. To decide which tabs belong together, it asks the Claude API, using an API key you provide. This policy explains exactly what that involves.
 
 ## What data the extension handles
 
 - **Tab titles and URLs.** When you click **Group tabs**, the extension reads the title and URL of each ungrouped, unpinned tab in that window. Before a URL is sent, its `#fragment` is always removed, and its `?query` string is removed unless you turn that setting off. Long titles and URLs are shortened.
-- **Existing tab group names and colors** in that window.
+- **Existing tab group names and colors** in that window, and the titles and URLs of up to 8 tabs in each group (shortened the same way), so that new tabs can be added to the group they fit.
 - **Your Claude API key**, which you enter on the Settings page.
 - **Your settings** (chosen model, smallest group size, the query-string option, the collapse option).
 - **Undo information**: which tabs the last few runs moved and into which groups.
@@ -18,7 +18,7 @@ The extension never reads the contents of web pages. It does not use cookies, an
 
 Data is sent only when you click **Group tabs** (or **Test key** on the Settings page), and only to the Claude API at `api.anthropic.com`:
 
-- **Group tabs** sends the tab titles, shortened URLs and existing group names described above, together with your API key.
+- **Group tabs** sends the tab titles, shortened URLs and existing group details described above, together with your API key.
 - **Test key** sends only your API key and the selected model name. No tab data is sent.
 
 Nothing is sent in the background, on a timer, or when you browse. No data is sent to the developer of this extension or to any other server.
