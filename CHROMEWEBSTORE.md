@@ -48,7 +48,7 @@ AI Tab Grouper is an independent project and is not affiliated with or endorsed 
 SUPPORT
 Bug reports and suggestions: https://github.com/ivandrofly/ai-tab-grouper/issues
 
-Version 0.1.0: first release.
+Version 0.2.0: new tabs now go into a matching existing group before a new group is created.
 ```
 
 **Category**
@@ -154,6 +154,7 @@ The zip must have `manifest.json` at its root, which zipping the contents of `di
 | Version | Date | Changes | Status |
 |---------|------|---------|--------|
 | 0.1.0 | 2026-10-11 | First release | Draft |
+| 0.2.0 | 2026-10-16 | Tabs join a matching existing group before a new one is created; existing groups' tab titles and URLs are now sent to Claude | Draft |
 
 ## Review Notes
 

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AI Tab Grouper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Uses Claude to sort your open tabs into named Chrome tab groups by topic.",
   "permissions": ["tabs", "tabGroups", "storage", "favicon"],
   "host_permissions": ["https://api.anthropic.com/*"],
